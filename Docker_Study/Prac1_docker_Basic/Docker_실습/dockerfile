@@ -1,0 +1,16 @@
+# FROM debian:latest
+FROM ubuntu:18.04
+
+LABEL Developer="Sehun Kim <h95fit@gmail.com>"
+
+RUN apt-get update \
+    && apt-get install -y nginx \
+    && apt-get install -y fortune
+
+COPY webpage.sh ./webpage.sh
+
+RUN chmod +x ./webpage.sh
+
+EXPOSE 80
+
+CMD ["sh", "-c", "./webpage.sh | nginx -g 'daemon off;'"]
